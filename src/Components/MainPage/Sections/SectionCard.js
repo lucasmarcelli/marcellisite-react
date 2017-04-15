@@ -56,7 +56,7 @@ class SectionCard extends Component {
           </a> );
         }else{
           html_button = (
-          <button key={"hero-button-" + i} onClick={() => jump(button_config[i].jump, {offset: -40})} className={"btn btn-info " + (button_config[i].cssClass ? button_config[i].cssClass : "")}>
+          <button key={"hero-button-" + i} onClick={() => jump(button_config[i].jump, {offset: -60})} className={"btn btn-info " + (button_config[i].cssClass ? button_config[i].cssClass : "")}>
             {button_config[i].label}
           </button> );
         }
