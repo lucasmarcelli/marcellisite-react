@@ -1,0 +1,14 @@
+.full-height {
+  min-height: 100vh;
+}
+
+.content {
+  min-height: inherit;
+  display: flex;
+  justify-content: center;
+  padding-top: 45px;
+}
+
+.inner-content{
+  width: 80%;
+}

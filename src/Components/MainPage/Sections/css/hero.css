@@ -1,0 +1,31 @@
+.hero{
+  background-image: url('../../../../Assets/Images/MainPage/background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero .card{
+  margin: 0px 15px;
+}
+
+
+@media (max-width: 768px){
+  .hero{
+    background-image: url('../../../../Assets/Images/MainPage/background-mobile.jpg');
+  }
+}
+
+@media (max-width: 640px){
+  .hero{
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .card:first-child {
+    margin-bottom: 30px;
+  }
+}

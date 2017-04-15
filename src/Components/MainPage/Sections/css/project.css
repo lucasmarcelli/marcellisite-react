@@ -1,0 +1,117 @@
+.project-top{
+  background-image: url('../../../../Assets/Images/MainPage/projects.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.project-card {
+  text-align: center;
+  padding: 20px;
+  opacity: 0.75;
+}
+
+.project-long {
+  overflow: hidden;
+  max-height: 0px;
+  transition: max-height 1s;
+}
+
+.open {
+  max-height: 1000px;
+  height: auto;
+}
+
+.project-list {
+  border-bottom: 3px solid #FFC150;
+}
+
+.project-items{
+  background-image: linear-gradient(#EBFEFB, #FFF 50%, #EBFEFB);
+  background-repeat: no-repeat;
+}
+
+.project-item {
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+  padding: 20px 84px;
+  border-top: 3px solid #FFC150;
+}
+
+.project-buttons {
+  margin-top: 16px;
+}
+
+.project-buttons .btn {
+  margin-right: 15px;
+}
+
+.project-item h1 {
+  font-weight: 300;
+}
+
+.project-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.project-title-container .badge {
+  font-size: 18px;
+  padding: 8px;
+}
+
+.project-title-container .badge.badge-active {
+  background-color: rgba(13,217,135,0.88);
+}
+
+.project-title-container .badge.badge-occasional {
+  background-color: rgba(113,193,113,0.88);
+}
+
+.project-title-container .badge.badge-inactive {
+  background-color: rgba(242,93,13,0.88);
+}
+
+.project-jump {
+  margin-top: 10px;
+}
+
+.project-jump .btn:first-child {
+  margin-right: 10px;
+}
+
+@media(max-width: 575px){
+
+  .project-item {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .project-title-container {
+    flex-direction: column;
+  }
+
+  .project-title {
+    margin-bottom: 15px;
+    font-size: 32px;
+  }
+
+  .badge {
+    margin-bottom: 15px;
+  }
+
+  .project-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .project-buttons .btn {
+    margin-right: 3px;
+    margin-bottom: 3px;
+  }
+}

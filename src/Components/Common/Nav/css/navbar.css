@@ -1,0 +1,12 @@
+.navbar {
+  background-color: rgba(0,0,0,0);
+  transition: background-color 0.5s;
+}
+
+.navbar-inverse .navbar-toggler {
+  border: none !important;
+}
+
+.no-toggler {
+  display: none;
+}

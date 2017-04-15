@@ -1,0 +1,28 @@
+
+.section-card {
+  max-width: 300px;
+  height: 550px;
+  padding: 25px 0px;
+}
+
+div.card-block {
+  padding: 25px;
+}
+
+.card-image img{
+  width: 250px;
+  height: 250px;
+}
+
+.btn-toolbar {
+  padding: 0px 25px;
+}
+
+.btn-toolbar .btn {
+  flex-grow: 1;
+  flex-basis: 10%;
+}
+
+.btn-toolbar .btn:not(:first-child){
+  margin-left: 15px;
+}

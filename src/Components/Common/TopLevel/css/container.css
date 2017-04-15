@@ -1,0 +1,17 @@
+body {
+  background-image: linear-gradient(to bottom, #FFF 0%, #E6FFFC 100%);
+  font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
+}
+
+.top-container {
+  min-height: 100vh;
+}
+
+.no-display{
+  display: none;
+}
+
+.btn {
+  height: 100%;
+}
