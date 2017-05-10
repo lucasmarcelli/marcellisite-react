@@ -1,6 +1,6 @@
 let Config = {
   api: {
-    base: "http://api.marcelli.ca"
+    base: "https://api.marcelli.ca"
   }
 }
 
