@@ -3,7 +3,6 @@ import SectionCard from './SectionCard';
 
 import zuko from '../../../Assets/Images/MainPage/lucas+zuko.jpg';
 import project from '../../../Assets/Images/MainPage/project.png';
-import resume from '../../../Assets/Files/LucasMarcelli.pdf';
 
 import './css/hero.css';
 
@@ -15,7 +14,7 @@ class Hero extends Component {
                      title="Lucas Marcelli" text="A passionate coder who loves food, cats, space, videogames and much more. Check out my Résumé, or read more about me!"
                      buttons={[
                        {
-                         url: resume,
+                         url: "files/LucasMarcelli.pdf",
                          external: true,
                          label: "Résumé"
                        },

@@ -46,8 +46,8 @@ class Project extends Component {
             <h1> Projects </h1>
             <h3> Where My Sleep Lives </h3>
             <div className="project-jump">
-                <button className="btn btn-success" onClick={() => (jump("#active-items", {offset: -60}))}>Active Projects</button>
-                <button className="btn btn-info" onClick={() => (jump("#inactive-items", {offset: -60}))}>Inactive Projects</button>
+                <button className="btn btn-success" onClick={() => (jump("#active-items", {offset: -55}))}>Active Projects</button>
+                <button className="btn btn-info" onClick={() => (jump("#inactive-items", {offset: -55}))}>Inactive Projects</button>
             </div>
           </div>
         </section>
