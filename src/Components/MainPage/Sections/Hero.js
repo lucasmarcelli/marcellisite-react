@@ -12,7 +12,7 @@ class Hero extends Component {
     return(
       <section className="hero full-height">
         <SectionCard image={zuko} altText="This cat is the worst for real though."
-                     title="Lucas Marcelli" text="An incredibly passionate coder who loves food, cats, space, videogames and much more. Check out my Résumé, or read more about me!"
+                     title="Lucas Marcelli" text="A passionate coder who loves food, cats, space, videogames and much more. Check out my Résumé, or read more about me!"
                      buttons={[
                        {
                          url: resume,
