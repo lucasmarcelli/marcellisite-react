@@ -35,7 +35,7 @@ class Project extends Component {
   }
 
   componentWillUnmount(){
-    MainpageStore.removeListener(Constants.Projects.PROJECTS_LOADED, this.setProjects);
+    MainpageStore.removeListener(Constants.ProjectConstants.PROJECTS_LOADED, this.setProjects);
   }
 
   render(){

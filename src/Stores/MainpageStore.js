@@ -1,11 +1,12 @@
 import Config from "../Config/config";
+import Constants from "../Constants/Constants";
 const EventEmitter = require('events');
 
 const ProjectConstants = {
   PROJECTS_LOADED: 'PROJECTS_LOADED'
 }
 
-class MainpageStoreClass extends EventEmitter{
+class MainpageStoreClass extends EventEmitter {
 
   constructor(){
     super();
@@ -17,14 +18,15 @@ class MainpageStoreClass extends EventEmitter{
         this.emit(ProjectConstants.PROJECTS_LOADED, this.projectList);
     }else{
         let self = this;
-        let xhr = new XMLHttpRequest();
-        xhr.open("GET", Config.api.base + "/main/projects", true);
-        xhr.onreadystatechange = function(){
-          if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-              self.setProjectList(JSON.parse(xhr.responseText));
-          }
-        }
-        xhr.send();
+        fetch(Config.api.base + "/main/projects", Constants.RESTConstants.GET)
+          .then(function(response){
+            if(response.ok){
+              return(response.json())
+            }
+          })
+          .then(function(response){
+            self.setProjectList(response);
+          })
     }
   }
 
