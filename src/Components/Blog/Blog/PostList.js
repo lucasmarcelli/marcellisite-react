@@ -4,6 +4,8 @@ import BlogStore from '../../../Stores/BlogStore';
 import Constants from '../../../Constants/Constants';
 import BlogLayout from '../Layout/BlogLayout';
 
+import './css/postList.css';
+
 class PostList extends Component {
 
   constructor(){
@@ -25,7 +27,9 @@ class PostList extends Component {
   render(){
     return(
       <BlogLayout>
-        {this.renderPostList()}
+        <div className="post-list">
+          {this.renderPostList()}
+        </div>
       </BlogLayout>
     )
   }
@@ -38,15 +42,13 @@ class PostList extends Component {
         if(post.subtitle){
           subtitle = (<h3 className="subtitle">{post.subtitle}</h3>);
         }
-        posts.push(<div className="post-div" key={post.slug}>
-                     <Link to={"/blog/" + post.slug}>
+        posts.push(<Link to={"/blog/" + post.slug} className="post" key={post.slug}>
                      <div className="inner-post-div">
                         <h1 className="title">{post.title}</h1>
                         {subtitle}
                         <span className="date">{post.pubDate.slice(0,10)}</span>
                       </div>
-                      </Link>
-                    </div>);
+                      </Link>);
       }
       return posts;
     }else{

@@ -1,0 +1,30 @@
+.post-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.post {
+  padding: 20px 30px;
+  color: #615252;
+  min-height: 90px;
+  flex: auto;
+  display: flex;
+}
+
+.post:hover {
+  background-color: #ffbcbc;
+}
+
+.inner-post-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.post:hover{
+  text-decoration: none;
+  color: #615252;
+}
+
+.date {
+  margin-top: auto;
+}

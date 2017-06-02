@@ -6,23 +6,7 @@ import './css/navbar.css';
 class NavBar extends Component {
 
   componentDidMount(){
-    let toggler = document.getElementsByClassName("navbar-toggler")[0];
-    toggler.classList.add("no-toggler");
 
-    window.onscroll = function() {
-      let pos = (window.pageYOffset !== undefined) ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
-      let nav = document.getElementsByClassName("main-nav");
-      if (pos < 80) {
-          nav[0].style.backgroundColor = 'rgba(0,0,0,0)';
-          toggler.classList.add("no-toggler");
-          if(document.getElementsByClassName("navbar-collapse")[0].classList.contains("show")){
-            toggler.click();
-          }
-      }else{
-          nav[0].style.backgroundColor = '#140605';
-          toggler.classList.remove("no-toggler");
-      }
-    }
   }
 
   render(){

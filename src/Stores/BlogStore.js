@@ -12,19 +12,30 @@ class BlogStoreClass extends EventEmitter {
   constructor(){
     super();
     this.postList = null;
+    this.lastPost = null;
   }
 
-  getPost(slug){
-    let self = this;
-    fetch(Config.api.base + "/blog/posts/" + slug, Constants.RESTConstants.GET)
-      .then(function(response){
-        if(response.ok){
-          return(response.json())
-        }
-      })
-      .then(function(post){
-        self.emit(BlogConstants.POST_LOADED, post);
-      })
+  getPost(slug, refresh){
+    if(!!this.lastPost && slug === this.lastPost.slug && !refresh){
+      this.emit(BlogConstants.POST_LOADED, this.lastPost);
+    }else{
+      let self = this;
+      let request = new Request(Config.api.base + "/blog/posts/" + slug, Constants.RESTConstants.GET);
+      fetch(request)
+        .then(function(response){
+          if(response.ok){
+            return(response.json())
+          }
+        })
+        .then(function(post){
+          self.setPost(post);
+        })
+    }
+  }
+
+  setPost(post){
+    this.lastPost = post;
+    this.emit(BlogConstants.POST_LOADED, post);
   }
 
   getPostList(refresh){
@@ -32,7 +43,8 @@ class BlogStoreClass extends EventEmitter {
       this.emit(BlogConstants.POSTS_LOADED, this.postList);
     }else{
       let self = this;
-      fetch(Config.api.base + "/blog/posts", Constants.RESTConstants.GET)
+      let request = new Request(Config.api.base + "/blog/posts", Constants.RESTConstants.GET);
+      fetch(request)
         .then(function(response){
           if(response.ok){
             return(response.json())
@@ -47,9 +59,23 @@ class BlogStoreClass extends EventEmitter {
   setPostList(posts){
     this.postList = posts;
     this.emit(BlogConstants.POSTS_LOADED, posts);
+
+    // Preload the first post as well, since it's the most likely to be clicked.
+
+    let self = this;
+    let request = new Request(Config.api.base + "/blog/posts/" + posts[0].slug, Constants.RESTConstants.GET);
+    fetch(request)
+      .then(function(response){
+        if(response.ok){
+          return(response.json())
+        }
+      })
+      .then(function(post){
+        self.setPost(post);
+      })
   }
 }
 
 let BlogStore = new BlogStoreClass();
 
- export default BlogStore;
+export default BlogStore;

@@ -18,7 +18,8 @@ class MainpageStoreClass extends EventEmitter {
         this.emit(ProjectConstants.PROJECTS_LOADED, this.projectList);
     }else{
         let self = this;
-        fetch(Config.api.base + "/main/projects", Constants.RESTConstants.GET)
+        let request = new Request(Config.api.base + "/main/projects", Constants.RESTConstants.GET);
+        fetch(request)
           .then(function(response){
             if(response.ok){
               return(response.json())
