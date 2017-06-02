@@ -6,4 +6,21 @@
   display: flex;
   justify-content: center;
   margin-bottom: 15px;
+
+}
+
+.image img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px){
+  .title {
+    font-size: 2em;
+  }
+
+  .subtitle {
+    font-size: 1.25em;
+  }
+
 }
