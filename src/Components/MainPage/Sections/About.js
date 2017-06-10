@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 import './css/about.css';
 
 import bitty from '../../../Assets/Images/MainPage/bitty.jpg';

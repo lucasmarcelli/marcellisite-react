@@ -1,0 +1,10 @@
+.wrapper {
+  padding-top: 150px;
+  display: flex;
+  justify-content: center;
+}
+
+.google-button {
+  background-color: #FFFFFF;
+  border: 1px solid lightgray;
+}

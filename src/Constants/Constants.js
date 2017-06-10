@@ -9,9 +9,16 @@ const Constants = {
     POST_LOADED: "POST_LOADED"
   },
 
+  AuthConstants: {
+    USER_LOADED: "USER_LOADED"
+  },
+
   RESTConstants: {
     GET: {
       method: 'GET'
+    },
+    POST: {
+      method: 'POST'
     }
   }
 

@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import AuthStore from '../../../Stores/AuthStore';
+import Constants from '../../../Constants/Constants';
+
 import './css/navbar.css';
 
 
 
 class NavBar extends Component {
 
-  componentDidMount(){
+  constructor(){
+    super();
+    this.state = {
+      admin: undefined
+    };
+    this.handleUser = this.handleUser.bind(this);
+  }
 
+  componentDidMount(){
+    AuthStore.addListener(Constants.AuthConstants.USER_LOADED, this.handleUser);
   }
 
   render(){
@@ -18,16 +30,25 @@ class NavBar extends Component {
         <a className="navbar-brand" href="/">Lucas Marcelli</a>
         <div className="collapse navbar-collapse" id="topNav">
           <ul className="navbar-nav ml-auto">
-            <li className="nav-item active">
-              <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
+            <li className="nav-item">
+              <Link to="/" className="nav-link">Home <span className="sr-only">(current)</span></Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link active" href="/blog">Blog</a>
+              <Link to="/blog" className="nav-link">Blog</Link>
             </li>
+            {this.state.admin ? (<li className="nav-item">
+                      <Link to="/admin" className="nav-link">Admin</Link>
+                    </li>) : null}
           </ul>
         </div>
       </nav>
     )
+  }
+
+  handleUser(user){
+    if(user.admin){
+      this.setState({admin: true})
+    }
   }
 }
 

@@ -2,10 +2,6 @@ import Config from "../Config/config";
 import Constants from "../Constants/Constants";
 const EventEmitter = require('events');
 
-const ProjectConstants = {
-  PROJECTS_LOADED: 'PROJECTS_LOADED'
-}
-
 class MainpageStoreClass extends EventEmitter {
 
   constructor(){
@@ -15,7 +11,7 @@ class MainpageStoreClass extends EventEmitter {
 
   getProjectList(refresh){
     if(!refresh && this.projectList){
-        this.emit(ProjectConstants.PROJECTS_LOADED, this.projectList);
+        this.emit(Constants.ProjectConstants.PROJECTS_LOADED, this.projectList);
     }else{
         let self = this;
         let request = new Request(Config.api.base + "/main/projects", Constants.RESTConstants.GET);
@@ -33,7 +29,7 @@ class MainpageStoreClass extends EventEmitter {
 
   setProjectList(projectList){
     this.projectList = projectList;
-    this.emit(ProjectConstants.PROJECTS_LOADED, projectList);
+    this.emit(Constants.ProjectConstants.PROJECTS_LOADED, projectList);
   }
 }
 

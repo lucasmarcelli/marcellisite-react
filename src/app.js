@@ -5,6 +5,7 @@ import NotFound from './Components/Common/Layout/NotFound';
 import Main from './Components/MainPage/Layout/Main';
 import PostList from './Components/Blog/Blog/PostList';
 import Post from './Components/Blog/Blog/Post';
+import Dashboard from './Components/Admin/Admin/Dashboard';
 
 class App extends Component {
 
@@ -14,6 +15,7 @@ class App extends Component {
         <Container>
           <Switch>
             <Route exact path="/" component={Main}/>
+            <Route exact path="/admin" component={Dashboard}/>
             <Route exact path="/blog" component={PostList}/>
             <Route path="/blog/:slug" component={Post}/>
             <Route path="*" component={NotFound}/>

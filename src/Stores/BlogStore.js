@@ -2,12 +2,7 @@ import Config from "../Config/config";
 import Constants from "../Constants/Constants";
 const EventEmitter = require('events');
 
-const BlogConstants = {
-  POSTS_LOADED: "POSTS_LOADED",
-  POST_LOADED: "POST_LOADED"
-};
-
-class BlogStoreClass extends EventEmitter {
+class BlogStore extends EventEmitter {
 
   constructor(){
     super();
@@ -17,7 +12,7 @@ class BlogStoreClass extends EventEmitter {
 
   getPost(slug, refresh){
     if(!!this.lastPost && slug === this.lastPost.slug && !refresh){
-      this.emit(BlogConstants.POST_LOADED, this.lastPost);
+      this.emit(Constants.BlogConstants.POST_LOADED, this.lastPost);
     }else{
       let self = this;
       let request = new Request(Config.api.base + "/blog/posts/" + slug, Constants.RESTConstants.GET);
@@ -35,12 +30,12 @@ class BlogStoreClass extends EventEmitter {
 
   setPost(post){
     this.lastPost = post;
-    this.emit(BlogConstants.POST_LOADED, post);
+    this.emit(Constants.BlogConstants.POST_LOADED, post);
   }
 
   getPostList(refresh){
     if(!refresh && this.postList){
-      this.emit(BlogConstants.POSTS_LOADED, this.postList);
+      this.emit(Constants.BlogConstants.POSTS_LOADED, this.postList);
     }else{
       let self = this;
       let request = new Request(Config.api.base + "/blog/posts", Constants.RESTConstants.GET);
@@ -58,7 +53,7 @@ class BlogStoreClass extends EventEmitter {
 
   setPostList(posts){
     this.postList = posts;
-    this.emit(BlogConstants.POSTS_LOADED, posts);
+    this.emit(Constants.BlogConstants.POSTS_LOADED, posts);
 
     // Preload the first post as well, since it's the most likely to be clicked.
 
@@ -76,6 +71,4 @@ class BlogStoreClass extends EventEmitter {
   }
 }
 
-let BlogStore = new BlogStoreClass();
-
-export default BlogStore;
+export default new BlogStore();
