@@ -16,8 +16,9 @@ class AuthStore extends EventEmitter {
 
   authenticate(id_token){
     this._id_token = id_token;
+    console.log(id_token);
     let headers = new Headers();
-    headers.append("id_token", id_token);
+    headers.append("token", id_token);
     let init = {...Constants.RESTConstants.POST}
     init.headers = headers;
     let cookieUser = (cookies.get("user") !== "undefined" ? cookies.get("user") : false);
