@@ -23,7 +23,7 @@ class AuthStore extends EventEmitter {
     init.headers = headers;
     let cookieUser = (cookies.get("user") !== "undefined" ? cookies.get("user") : false);
     if(cookieUser && cookieUser.google_id){
-      init.headers.append("google_id", cookieUser.google_id);
+      init.headers.append("googleid", cookieUser.google_id);
       fetch(Config.api.base + '/auth/verifycookie', init)
         .then(function(response){
           if(response.ok){
