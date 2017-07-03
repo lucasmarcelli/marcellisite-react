@@ -10,7 +10,8 @@ const Constants = {
   },
 
   AuthConstants: {
-    USER_LOADED: "USER_LOADED"
+    USER_LOADED: "USER_LOADED",
+    USER_LOGGED_OUT: "USER_LOGGED_OUT"
   },
 
   RESTConstants: {

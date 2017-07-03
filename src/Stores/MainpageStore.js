@@ -13,7 +13,6 @@ class MainpageStoreClass extends EventEmitter {
     if(!refresh && this.projectList){
         this.emit(Constants.ProjectConstants.PROJECTS_LOADED, this.projectList);
     }else{
-        let self = this;
         let request = new Request(Config.api.base + "/main/projects", Constants.RESTConstants.GET);
         fetch(request)
           .then(function(response){
@@ -21,9 +20,7 @@ class MainpageStoreClass extends EventEmitter {
               return(response.json())
             }
           })
-          .then(function(response){
-            self.setProjectList(response);
-          })
+          .then((projectList) => this.setProjectList(projectList));
     }
   }
 

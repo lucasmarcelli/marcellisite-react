@@ -1,5 +1,5 @@
+/* global gapi */
 import React, { Component } from 'react';
-import GoogleLogin from 'react-google-login';
 import AuthStore from '../../../Stores/AuthStore';
 import Constants from '../../../Constants/Constants';
 
@@ -10,21 +10,44 @@ class Dashboard extends Component {
 
     constructor(){
       super();
+      this.mounted = false;
       this.state = {
         authenticated: false,
-        authorized: false
+        authorized: false,
+        validGoogle: false
       }
       this.onSignIn = this.onSignIn.bind(this);
       this.handleUser = this.handleUser.bind(this);
+      this.logout = this.logout.bind(this);
+      this.renderSignin = this.renderSignin.bind(this);
       this.authorize = this.authorize.bind(this);
     }
 
     componentDidMount(){
+      this.mounted = true;
       AuthStore.addListener(Constants.AuthConstants.USER_LOADED, this.handleUser);
-      let token = AuthStore.getToken();
-      if(token !== null){
-          AuthStore.getUser(token);
-      }
+      this.renderSignin();
+    }
+
+
+    componentWillUnmount(){
+      this.mounted = false;
+    }
+
+    renderSignin(timeout){
+      let self = this;
+      setTimeout(function(){
+        gapi.signin2.render('googlebutton', {
+          'scope': 'profile',
+          'width': 240,
+          'height': 50,
+          'longtitle': true,
+          'theme': 'dark',
+          'onsuccess': self.onSignIn,
+          'onfailure': null
+        });
+      }, (timeout ? 500 : 0));
+
     }
 
     onSignIn(googleUser){
@@ -32,23 +55,30 @@ class Dashboard extends Component {
       if(googleUser.error){
         // I dunno, I don't really care right now either.
       }else{
-        AuthStore.getUser(googleUser.tokenId);
+        this.setState({validGoogle: true})
+        AuthStore.getUser(googleUser.getAuthResponse().id_token, googleUser.getBasicProfile().getId());
       }
+    }
+
+    logout(){
+      gapi.auth2.getAuthInstance().signOut();
+      AuthStore.logout();
+      this.setState({authenticated: false, authorized: false, validGoogle: false}, () => this.renderSignin(true));
     }
 
     render(){
       let dashboard = null;
-      if(!this.state.authenticated){
-        dashboard = <GoogleLogin
-              className="google-button"
-              clientId="702656611928-etumg78clanb2f80ahuv5am7lumm0f3m.apps.googleusercontent.com"
-              onSuccess={this.onSignIn}
-              onFailure={this.onSignIn}
-            />
+      if(!this.state.authenticated && !this.state.authorized && !this.state.validGoogle){
+        dashboard = <div className="btn-container" id="googlebutton"> </div>
       }else if(this.state.authenticated && !this.state.authorized){
         dashboard = <h1> You aint allowed here kiddo. </h1>
       }else if(this.state.authenticated && this.state.authorized){
-        dashboard = <h1> Authed </h1>
+        dashboard = <h1 onClick={this.logout}> Authed </h1>
+      }else if(this.state.validGoogle && !this.state.authenticated){
+        dashboard = (
+          <div onClick={this.logout}>
+            <h1> You dont even go here </h1>
+          </div>)
       }else{
         dashboard = <h1> Stop fucking with the state... </h1>
       }
@@ -61,13 +91,13 @@ class Dashboard extends Component {
     }
 
     handleUser(user){
-      if(user){
-        this.setState({authenticated: true}, this.authorize(user));
+      if(user && this.mounted){
+          this.setState({authenticated: true}, () => this.authorize(user.admin));
+        }
       }
-    }
 
-    authorize(user){
-      if(user.admin){
+    authorize(admin){
+      if(admin){
         this.setState({authorized: true});
       }
     }

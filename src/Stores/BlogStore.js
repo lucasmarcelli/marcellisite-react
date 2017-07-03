@@ -14,7 +14,6 @@ class BlogStore extends EventEmitter {
     if(!!this.lastPost && slug === this.lastPost.slug && !refresh){
       this.emit(Constants.BlogConstants.POST_LOADED, this.lastPost);
     }else{
-      let self = this;
       let request = new Request(Config.api.base + "/blog/posts/" + slug, Constants.RESTConstants.GET);
       fetch(request)
         .then(function(response){
@@ -22,9 +21,7 @@ class BlogStore extends EventEmitter {
             return(response.json())
           }
         })
-        .then(function(post){
-          self.setPost(post);
-        })
+        .then((post) => this.setPost(post));
     }
   }
 
@@ -37,7 +34,6 @@ class BlogStore extends EventEmitter {
     if(!refresh && this.postList){
       this.emit(Constants.BlogConstants.POSTS_LOADED, this.postList);
     }else{
-      let self = this;
       let request = new Request(Config.api.base + "/blog/posts", Constants.RESTConstants.GET);
       fetch(request)
         .then(function(response){
@@ -45,9 +41,7 @@ class BlogStore extends EventEmitter {
             return(response.json())
           }
         })
-        .then(function(posts){
-          self.setPostList(posts);
-        });
+        .then((posts) => this.setPostList(posts));
     }
   }
 
@@ -57,7 +51,6 @@ class BlogStore extends EventEmitter {
 
     // Preload the first post as well, since it's the most likely to be clicked.
 
-    let self = this;
     let request = new Request(Config.api.base + "/blog/posts/" + posts[0].slug, Constants.RESTConstants.GET);
     fetch(request)
       .then(function(response){
@@ -65,9 +58,7 @@ class BlogStore extends EventEmitter {
           return(response.json())
         }
       })
-      .then(function(post){
-        self.setPost(post);
-      })
+      .then((post) => this.setPost(post));
   }
 }
 
