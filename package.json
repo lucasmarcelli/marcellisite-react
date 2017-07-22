@@ -10,6 +10,7 @@
     "react-dom": "^15.4.2",
     "react-google-login": "^2.8.9",
     "react-router-dom": "^4.0.0",
+    "recharts": "^1.0.0-alpha.1",
     "universal-cookie": "^2.0.8"
   },
   "devDependencies": {
